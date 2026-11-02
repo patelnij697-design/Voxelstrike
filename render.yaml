@@ -1,0 +1,25 @@
+# Render blueprint for the multiplayer relay.
+#
+# Paste this repo into Render → "New → Blueprint" and it creates the service on
+# its own. If you create the Web Service by hand instead, use the same values:
+#   Root Directory  relay
+#   Build Command   npm install
+#   Start Command   npm start
+#   Health Check    /healthz
+#
+# region: pick the one nearest your players (oregon · ohio · virginia ·
+# frankfurt · singapore). The relay is only fast if it is near the players.
+services:
+  - type: web
+    name: voxelstrike-relay
+    runtime: node
+    plan: free
+    region: oregon
+    rootDir: relay
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
